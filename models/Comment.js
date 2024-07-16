@@ -8,11 +8,8 @@ const CommentSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-//새로추가한거
+
 const Comment = mongoose.model('Comment', CommentSchema);
-
-
-//module.exports = mongoose.model('Comment', CommentSchema);
 
 module.exports = Comment;
 

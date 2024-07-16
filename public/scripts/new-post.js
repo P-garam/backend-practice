@@ -1,3 +1,4 @@
+// public/scripts/new-post.js
 document.getElementById('post-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -5,7 +6,7 @@ document.getElementById('post-form').addEventListener('submit', (event) => {
     const content = document.getElementById('content').value;
     const author = document.getElementById('author').value;
 
-    fetch('http://localhost:3001/api/posts', {
+    fetch('http://localhost:3001/posts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

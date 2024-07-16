@@ -43,8 +43,7 @@ const postSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }] // comments 경로 추가
-
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }] // comments 필드는 ObjectId 배열로 정의
 });
 
 const Post = mongoose.model('Post', postSchema);

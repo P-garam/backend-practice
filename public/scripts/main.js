@@ -1,5 +1,7 @@
+
+// public/scripts/main.js
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:3001/api/posts')
+    fetch('http://localhost:3001/posts')
         .then(response => response.json())
         .then(posts => {
             const postsContainer = document.getElementById('posts-container');
