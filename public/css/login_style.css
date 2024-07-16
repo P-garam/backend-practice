@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fafafa;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-box {
+    width: 300px;
+    padding: 40px;
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -5px;
+    left: 10px;
+    font-size: 12px;
+    color: #333;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #bf3000;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #882606;
+}
+
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #bf3000;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

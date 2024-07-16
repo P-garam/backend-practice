@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*메뉴*/
+#menu-and-screen {
+    height: 100vh;
+    flex-direction: row;
+    display: flex;
+}
+
+#menu {
+    border-right: 1px solid #dbdbdb;
+    padding: 12px;
+    background-color: white;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: fixed;
+}
+
+#logo {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 0px 15px;
+    font-family: 'Dancing Script', cursive;
+    flex: 0.6;
+}
+
+#list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 3.5;
+}
+
+#plus {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex: 0.8;
+}
+
+#list a, #plus a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+#list a:hover, #plus a:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+
+
+.active {
+    font-weight: bold;
+}
+
+#screen {
+    margin: auto;
+}

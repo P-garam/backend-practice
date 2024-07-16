@@ -1,0 +1,89 @@
+#screen * {
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+}
+
+#container {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dbdbdb;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#postForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"], textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: calc(100% - 22px); /* 100% width - padding */
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    align-self: center;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+#posts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#posts > div {
+    padding: 15px;
+    border-bottom: 1px solid #dbdbdb;
+    cursor: pointer;
+}
+
+#posts > div:hover {
+    background-color: #f1f1f1;
+}
+
+#posts h3 {
+    margin: 0;
+    color: #333;
+}
