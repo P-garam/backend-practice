@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 수정</title>
+</head>
+<body>
+    <h1>게시글 수정</h1>
+    <form id="editForm">
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="content">내용:</label>
+        <textarea id="content" name="content" required></textarea><br><br>
+        <button type="submit">게시글 수정</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            // 게시글 내용 불러오기
+            fetch(`http://localhost:3001/api/posts/${postId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(post => {
+                    document.getElementById('title').value = post.title;
+                    document.getElementById('content').value = post.content;
+                })
+                .catch(error => console.error('Error:', error));
+
+            // 게시글 수정
+            document.getElementById('editForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                const title = document.getElementById('title').value;
+                const content = document.getElementById('content').value;
+
+                try {
+                    const response = await fetch(`http://localhost:3001/api/posts/${postId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ title, content })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('게시글 수정에 실패했습니다.');
+                    }
+
+                    alert('게시글이 수정되었습니다.');
+                    window.location.href = `/post.html?id=${postId}`; // 수정된 게시글 페이지로 이동
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -28,7 +28,6 @@ db.once('open', () => {
 
 // 라우터 설정
 app.use('/api/posts', postRouter); // '/posts' 엔드포인트에 postRouter 연결
-
 app.use('/api/comments', commentRouter);
 
 // 정적 파일 서빙 설정
@@ -36,6 +35,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// edit.html 파일을 서빙할 수 있도록 추가
+app.get('/edit.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'edit.html'));
 });
 
 app.listen(PORT, () => {
