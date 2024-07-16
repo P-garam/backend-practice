@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,5 +11,108 @@
     <h1>Blog Post</h1>
     <div id="post-container"></div>
     <script src="scripts/post.js"></script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세 페이지</title>
+</head>
+<body>
+    <div id="post-container">
+        <!-- 여기에 게시글 내용이 동적으로 채워질 부분 -->
+    </div>
+
+    <!-- 홈 화면으로 이동하는 버튼 -->
+    <button id="home-button">홈 화면으로 이동</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            fetch(`http://localhost:3001/api/posts/${postId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(post => {
+                    const postContainer = document.getElementById('post-container');
+                    postContainer.innerHTML = `
+                        <h2>${post.title}</h2>
+                        <p>${post.content}</p>
+                        <p>Author: ${post.author}</p>
+                        <p>Likes: <span id="likes-count">${post.likes}</span></p>
+                        <button id="like-button">Like</button>
+                        <h3>Comments</h3>
+                        <div id="comments-container"></div>
+                        <form id="comment-form">
+                            <input type="text" id="comment-author" placeholder="Your name" required>
+                            <textarea id="comment-content" placeholder="Your comment" required></textarea>
+                            <button type="submit">Add Comment</button>
+                        </form>
+                    `;
+
+                    document.getElementById('like-button').addEventListener('click', () => {
+                        fetch(`http://localhost:3001/api/posts/${postId}/like`, { method: 'POST' })
+                            .then(response => response.json())
+                            .then(updatedPost => {
+                                document.getElementById('likes-count').innerText = updatedPost.likes;
+                            });
+                    });
+
+                    const commentsContainer = document.getElementById('comments-container');
+                    if (post.comments && post.comments.length > 0) {
+                        post.comments.forEach(comment => {
+                            const commentElement = document.createElement('div');
+                            commentElement.innerHTML = `
+                                <p>${comment.content}</p>
+                                <p>Author: ${comment.author}</p>
+                            `;
+                            commentsContainer.appendChild(commentElement);
+                        });
+                    } else {
+                        commentsContainer.innerHTML = '<p>No comments yet.</p>';
+                    }
+
+                    document.getElementById('comment-form').addEventListener('submit', (event) => {
+                        event.preventDefault();
+                        const author = document.getElementById('comment-author').value;
+                        const content = document.getElementById('comment-content').value;
+
+                        fetch(`http://localhost:3001/api/comments/${postId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ author, content })
+                        })
+                            .then(response => response.json())
+                            .then(newComment => {
+                                const commentElement = document.createElement('div');
+                                commentElement.innerHTML = `
+                                    <p>${newComment.content}</p>
+                                    <p>Author: ${newComment.author}</p>
+                                `;
+                                commentsContainer.appendChild(commentElement);
+                                document.getElementById('comment-author').value = '';
+                                document.getElementById('comment-content').value = '';
+                            });
+                    });
+
+                    // 홈 화면으로 이동하는 버튼 이벤트 처리
+                    document.getElementById('home-button').addEventListener('click', () => {
+                        window.location.href = '/';
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>
